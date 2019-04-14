@@ -3,7 +3,8 @@
 # 開発環境
 - go version go1.11.1 darwin/amd64
 
-# フォルダ構成規約
-下記を参照
-
+# 開発規約
+## Goフォルダ構成
 [Standard Go Project Layout](https://github.com/golang-standards/project-layout)
+## Gitブランチ構成
+[A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
