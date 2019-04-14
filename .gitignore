@@ -1,0 +1,2 @@
+# MYSQLの設定ファイル(各自設定, 項目はcmd/db/main.go参照)
+config.json
