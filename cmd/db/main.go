@@ -2,20 +2,19 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
-	"os"
 
 	_ "github.com/go-sql-driver/mysql"
-	_ "github.com/kerukukku1/procon30_battle_server/cmd/"
+	"github.com/kerukukku1/procon30_battle_server/internal/pkg"
 )
 
 func main() {
-	db, err := sql.Open("mysql", "root:"+os.Getenv("GOMYSQLPASSWD")+"/my_database")
+	c, err := pkg.MySQLConfigRead("config.json")
 	if err != nil {
 		panic(err.Error())
 	}
-	c, err := pkg.MySQLConfigRead("config.json")
+	db, err := sql.Open("mysql", c.Username+":"+c.Password+"@/"+c.DbName)
+	if err != nil {
+		panic(err.Error())
+	}
 	defer db.Close()
-	fmt.Printf("type is %T \n", db)
-	fmt.Printf("c is %T \n", c)
 }
