@@ -18,3 +18,12 @@ services:
     - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
     - 3306:3306
+  # Golang
+  go:
+    image: golang:1.11.1
+    container_name: golang
+    command: /usr/local/bin/init-golang.sh
+    volumes:
+    - ./docker/go/init-golang.sh:/usr/local/bin/init-golang.sh
+    ports:
+    - 8000:8000
