@@ -1,9 +1,4 @@
-INSERT INTO test_table
-    (name)
+INSERT INTO users
+    (token, name)
 VALUES
-    ('jhon');
-
-INSERT INTO test_table
-    (name)
-VALUES
-    ('michael');
+    ('hogefuga', 'jhon');
