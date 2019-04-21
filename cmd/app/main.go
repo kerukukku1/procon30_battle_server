@@ -3,7 +3,8 @@ package main
 import (
 	"log"
 	"net/http"
-
+	
+	"./api"
 	"github.com/gorilla/mux"
 )
 
@@ -16,5 +17,6 @@ func main() {
 	// http.ListenAndServe(":8080", nil)
 	router := mux.NewRouter()
 	router.HandleFunc("/entry", entryHandler).Methods("GET")
+	router.HandleFunc("/api/regist/{userName}", api.RegistHandler).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
