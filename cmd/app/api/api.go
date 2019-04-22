@@ -1,28 +1,25 @@
 package api
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
+	"encoding/hex"
 
+	"golang.org/x/crypto/scrypt"
 	"github.com/gorilla/mux"
-	jwt "github.com/dgrijalva/jwt-go"
 )
 
 func RegistHandler(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 	fmt.Println("regist", vars["userName"])
 
-	// set header
-    token := jwt.New(jwt.SigningMethodHS256)
+	// read salt
+	salt := []byte("some salt")
 
-    // set claims
-    claims := token.Claims.(jwt.MapClaims)
-    claims["name"] = vars["userName"]
-
-	// make JWT
-	// TODO: signature
-    tokenString, _ := token.SignedString([]byte("signature"))
+	// convert hash
+	converted, _ := scrypt.Key([]byte(vars["userName"]), salt, 32768, 8, 1, 32)
+	token := hex.EncodeToString(converted[:])
 
 	// return JWT
-	fmt.Fprintf(w, tokenString)
+	fmt.Fprintf(w, token)
 }
