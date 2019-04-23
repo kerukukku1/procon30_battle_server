@@ -20,6 +20,6 @@ func RegistHandler(w http.ResponseWriter, r *http.Request){
 	converted, _ := scrypt.Key([]byte(vars["userName"]), salt, 32768, 8, 1, 32)
 	token := hex.EncodeToString(converted[:])
 
-	// return hash
+	// display hash
 	fmt.Fprintf(w, token)
 }
